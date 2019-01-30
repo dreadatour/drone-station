@@ -1,0 +1,134 @@
+openapi: 3.0.1
+
+info:
+  title: Drone Station API doc
+  version: 1.0.0
+  description: API documentation for Drone Station.
+
+servers:
+  - url: https://drone-station.atlas.corp/
+    description: Production API
+  - url: https://stage.drone-station.atlas.corp/
+    description: Staging API
+
+tags:
+  - name: Drones
+    description: Work with drones - list, add, remove.
+
+paths:
+  /v1/drones:
+    get:
+      operationId: v1-get-drones
+      summary: Drones list
+      tags:
+        - Drones
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1/Drones/DronesListResponse'
+              examples:
+                details:
+                  $ref: '#/components/examples/v1/Drones/Response/List'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1/Common/ServerErrorResponse'
+              examples:
+                server-error:
+                  $ref: '#/components/examples/v1/Common/InternalServerErrorResponse'
+
+    post:
+      operationId: v1-add-drone
+      summary: Add drone
+      tags:
+        - Drones
+      requestBody:
+        description: Add new drone
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1/Drones/DroneAddRequest'
+            examples:
+              add:
+                $ref: '#/components/examples/v1/Drones/Request/Add'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1/Drones/DroneResponse'
+              examples:
+                details:
+                  $ref: '#/components/examples/v1/Drones/Response/Details'
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1/Common/ClientErrorResponse'
+              examples:
+                not-found:
+                  $ref: '#/components/examples/v1/Common/BadJSONResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1/Common/ServerErrorResponse'
+              examples:
+                server-error:
+                  $ref: '#/components/examples/v1/Common/InternalServerErrorResponse'
+
+  /v1/drones/{droneId}:
+    delete:
+      summary: Remove drone
+      tags:
+      - Drones
+      parameters:
+      - in: path
+        name: droneId
+        schema:
+          type: string
+        description: Drone ID.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1/Common/EmptyResponse'
+              examples:
+                details:
+                  $ref: '#/components/examples/v1/Common/EmptyResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1/Common/ClientErrorResponse'
+              examples:
+                not-found:
+                  $ref: '#/components/examples/v1/Common/NotFoundResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1/Common/ServerErrorResponse'
+              examples:
+                server-error:
+                  $ref: '#/components/examples/v1/Common/InternalServerErrorResponse'
+
+components:
+  schemas:
+    v1:
+      Common:
+        $ref: 'v1/schemas.yaml'
+      Drones:
+        $ref: 'v1/drones/schemas.yaml'
+
+  examples:
+    v1:
+      Common:
+        $ref: 'v1/examples.yaml'
+      Drones:
+        $ref: 'v1/drones/examples.yaml'

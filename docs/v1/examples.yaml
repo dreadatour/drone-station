@@ -1,0 +1,25 @@
+EmptyResponse:
+  summary: Empty response
+  value:
+    status: success
+
+InternalServerErrorResponse:
+  summary: Internal server error
+  value:
+    status: error
+    code: internal-error
+    message: Internal server error
+
+BadJSONResponse:
+  summary: Bad JSON
+  value:
+    status: fail
+    code: bad-json
+    message: Bad JSON
+
+NotFoundResponse:
+  summary: Not found
+  value:
+    status: fail
+    code: not-found
+    message: Not found

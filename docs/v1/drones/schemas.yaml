@@ -1,0 +1,60 @@
+Drone:
+  type: object
+  description: Drone.
+  properties:
+    id:
+      type: string
+      description: Drone ID.
+    quadrant:
+      type: number
+      description: Map quadrant.
+    x:
+      type: string
+      description: Drone position X relative to quadrant, quadrant + x = longitude (treated as floating point number).
+    y:
+      type: string
+      description: Drone position Y relative to quadrant, quadrant + y = latitude (treated as floating point number).
+
+DroneResponse:
+  type: object
+  description: Drone info response.
+  properties:
+    status:
+      type: string
+      enum:
+        - success
+        - fail
+        - error
+    payload:
+      type: object
+      $ref: '#/Drone'
+
+DronesListResponse:
+  type: object
+  description: Drones list response.
+  properties:
+    status:
+      type: string
+      enum:
+        - success
+        - fail
+        - error
+    payload:
+      type: array
+      description: Drones list.
+      items:
+        $ref: '#/Drone'
+
+DroneAddRequest:
+  type: object
+  description: Add new drone request.
+  properties:
+    quadrant:
+      type: number
+      description: Map quadrant.
+    x:
+      type: string
+      description: Drone position X relative to quadrant, quadrant + x = longitude (treated as floating point number).
+    y:
+      type: string
+      description: Drone position Y relative to quadrant, quadrant + y = latitude (treated as floating point number).

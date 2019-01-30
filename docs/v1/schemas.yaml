@@ -1,0 +1,39 @@
+EmptyResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      title: response status
+      description: Response status is `success` for successful requests.
+
+ClientErrorResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      title: response status
+      description: Response status is `fail` for client errors.
+    code:
+      type: string
+      title: error code
+      description: Should be used to compare returned error in case we want to trigger some actions depending on error type.
+    message:
+      type: string
+      title: error message
+      description: Human-readable error message (better to not use it on clients if we have i18n).
+
+ServerErrorResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      title: response status
+      description: Response status is `error` for server errors.
+    code:
+      type: string
+      title: error code
+      description: Should be used to compare returned error in case we want to trigger some actions depending on error type.
+    message:
+      type: string
+      title: error message
+      description: Human-readable error message (better to not use it on clients if we have i18n).

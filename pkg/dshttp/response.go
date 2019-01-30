@@ -24,7 +24,7 @@ type Response struct {
 
 var (
 	errorInternalServerJSON = []byte(`{"status":"error","code":"internal-error","message":"Internal server error"}`)
-	errorNotFoundJSON       = []byte(`{"status":"error","code":"not-found","message":"Not found"}`)
+	errorNotFoundJSON       = []byte(`{"status":"fail","code":"not-found","message":"Not found"}`)
 	emptyJSON               = []byte(`{"status":"success"}`)
 )
 

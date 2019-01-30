@@ -30,6 +30,20 @@ You can use configuration from `.env` file during development. To do that use `-
 $ go run cmd/api/main.go -dotenv
 ```
 
+or simply:
+
+```
+$ make api
+```
+
+### Documentation
+
+API documentation leaves in `docs` folder in OpenAPI format. To view API documentation, simply run:
+
+```
+$ make open_api_docs
+```
+
 ### Vendoring
 
 Third-party packages are vendored using [dep](https://github.com/golang/dep).
