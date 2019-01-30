@@ -2,6 +2,14 @@
 
 
 [[projects]]
+  digest = "1:ca59b1175189b3f0e9f1793d2c350114be36eaabbe5b9f554b35edee1de50aea"
+  name = "github.com/gorilla/mux"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "a7962380ca08b5a188038c69871b8d3fbdf31e89"
+  version = "v1.7.0"
+
+[[projects]]
   digest = "1:ecd9aa82687cf31d1585d4ac61d0ba180e42e8a6182b85bd785fcca8dfeefc1b"
   name = "github.com/joho/godotenv"
   packages = ["."]
@@ -24,6 +32,14 @@
   pruneopts = "UT"
   revision = "5c8c8bd35d3832f5d134ae1e1e375b69a4d25242"
   version = "v1.0.1"
+
+[[projects]]
+  digest = "1:274f67cb6fed9588ea2521ecdac05a6d62a8c51c074c1fccc6a49a40ba80e925"
+  name = "github.com/satori/go.uuid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
+  version = "v1.2.0"
 
 [[projects]]
   digest = "1:87c2e02fb01c27060ccc5ba7c5a407cc91147726f8f40b70cceeedbc52b1f3a8"
@@ -56,8 +72,10 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/gorilla/mux",
     "github.com/joho/godotenv",
     "github.com/kelseyhightower/envconfig",
+    "github.com/satori/go.uuid",
     "github.com/sirupsen/logrus",
   ]
   solver-name = "gps-cdcl"
