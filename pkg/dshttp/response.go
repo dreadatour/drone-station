@@ -23,9 +23,9 @@ type Response struct {
 }
 
 var (
-	errorInternalServerJSON = []byte(`{"status":"error","code":"internal-error","message":"Internal server error"}`)
-	errorNotFoundJSON       = []byte(`{"status":"fail","code":"not-found","message":"Not found"}`)
-	emptyJSON               = []byte(`{"status":"success"}`)
+	internalServerErrorResponseJSON = []byte(`{"status":"error","code":"internal-error","message":"Internal server error"}`)
+	notFoundResponseJSON            = []byte(`{"status":"fail","code":"not-found","message":"Not found"}`)
+	emptyResponseJSON               = []byte(`{"status":"success"}`)
 )
 
 // InternalServerErrorResponse writes a "500 Internal Server Error" response
@@ -33,7 +33,7 @@ func InternalServerErrorResponse(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("X-Content-Type-Options", "nosniff")
 	w.WriteHeader(http.StatusInternalServerError)
-	w.Write(errorInternalServerJSON)
+	w.Write(internalServerErrorResponseJSON)
 }
 
 // NotFoundErrorResponse writes a "404 Not Found" response
@@ -41,13 +41,13 @@ func NotFoundErrorResponse(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("X-Content-Type-Options", "nosniff")
 	w.WriteHeader(http.StatusNotFound)
-	w.Write(errorNotFoundJSON)
+	w.Write(notFoundResponseJSON)
 }
 
 // JSONEmptyResponse writes an empty successful json response
 func JSONEmptyResponse(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(emptyJSON)
+	w.Write(emptyResponseJSON)
 }
 
 // FailResponse writes a fail to response stream

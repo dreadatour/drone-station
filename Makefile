@@ -17,3 +17,6 @@ api:
 
 open_api_docs:
 	@python -c "$$API_DOCS_SERVE"
+
+test:
+	@go test -race -cover `go list ./...`
