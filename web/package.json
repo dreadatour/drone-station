@@ -1,0 +1,47 @@
+{
+  "name": "drone-station",
+  "version": "0.0.1",
+  "description": "Drone Station",
+  "main": "index.tsx",
+  "repository": "https://github.com/dreadatour/drone-station",
+  "author": {
+    "name": "Vladimir Rudnykh",
+    "email": "dreadatour@gmail.com",
+    "url": "https://github.com/dreadatour"
+  },
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "webpack-dev-server --display-error-details --config webpack.development.js --port 8081 --watch",
+    "build": "webpack --display-error-details --config webpack.production.js",
+    "server": "node server.js",
+    "lint": "tslint --config tslint.json --project tsconfig.json 'src/**/*.ts{,x}'"
+  },
+  "dependencies": {
+    "@types/react": "^16.7.22",
+    "@types/react-dom": "^16.0.11",
+    "ejs": "^2.6.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "copy-webpack-plugin": "^4.6.0",
+    "dotenv": "^6.2.0",
+    "eslint": "^5.12.1",
+    "eslint-plugin-react": "^7.12.4",
+    "html-webpack-harddisk-plugin": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "source-map-loader": "^0.2.4",
+    "tslint": "^5.12.1",
+    "tslint-consistent-codestyle": "^1.15.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-microsoft-contrib": "^6.0.0",
+    "typescript": "^3.2.4",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-merge": "^4.2.1"
+  }
+}

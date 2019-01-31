@@ -1,0 +1,8 @@
+.DS_Store
+web/dist
+web/node_modules
+yarn-error.log
+*.min.js
+*.min.css
+*.map
+*.css.d.ts

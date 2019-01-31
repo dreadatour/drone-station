@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Drone Station</title>
+    <link rel="shortcut icon" type="image/png" sizes="96x96" href="/static/img/favicon/favicon-96x96.png" />
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="/static/img/favicon/favicon-32x32.png" />
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="/static/img/favicon/favicon-16x16.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/drone-station.css?<%= htmlWebpackPlugin.options.VERSION %>">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>window.CONFIG = {
+        API_URL: '<%= htmlWebpackPlugin.options.API_URL %>',
+    }</script>
+    <% if (htmlWebpackPlugin.options.ENV != 'development') { %>
+    <script type="text/javascript" src="/static/js/drone-station.js?<%= htmlWebpackPlugin.options.VERSION %>"></script>
+    <% } %>
+  </body>
+</html>

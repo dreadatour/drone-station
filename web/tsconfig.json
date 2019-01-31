@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "module": "es6",
+    "target": "es5",
+    "lib": ["dom", "es6", "es2016.array.include"],
+    "jsx": "react"
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
