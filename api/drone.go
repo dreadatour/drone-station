@@ -9,58 +9,80 @@ import (
 
 	"github.com/dreadatour/drone-station/object"
 	"github.com/dreadatour/drone-station/pkg/dshttp"
-	"github.com/dreadatour/drone-station/storage"
+	"github.com/dreadatour/drone-station/service"
 )
 
 // DroneHandlers is drone handlers interface
 type DroneHandlers interface {
 	List() http.HandlerFunc
-	Create() http.HandlerFunc
-	Delete() http.HandlerFunc
+	Add() http.HandlerFunc
+	Remove() http.HandlerFunc
 }
 
 // NewDroneHandlers returns initialised drone handlers interface
-func NewDroneHandlers(droneStorage *storage.Drones, logger *logrus.Logger) DroneHandlers {
+func NewDroneHandlers(droneService service.DroneService, logger *logrus.Logger) DroneHandlers {
 	return &droneHandler{
-		droneStorage: droneStorage,
+		droneService: droneService,
 		logger:       logger,
 	}
 }
 
 type droneHandler struct {
-	droneStorage *storage.Drones
+	droneService service.DroneService
 	logger       *logrus.Logger
 }
 
 func (h *droneHandler) List() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		drones := h.droneStorage.List()
+		if err := r.ParseForm(); err != nil {
+			h.logger.WithError(err).Error("Failed to parse GET-params from request")
+			dshttp.FailResponse(w, "bad-request", "Request is incorrect", nil)
+			return
+		}
+
+		quadrant := r.Form.Get(`quadrant`)
+		if quadrant == "" {
+			dshttp.FailResponse(w, "bad-request", "Please, specify quadrant", nil)
+			return
+		}
+
+		drones, err := h.droneService.List(r.Context(), quadrant)
+		if err != nil {
+			h.logger.WithError(err).Error("Failed to get drones list from service")
+			dshttp.InternalServerErrorResponse(w)
+			return
+		}
 
 		dshttp.JSONResponse(w, drones, nil)
 	}
 }
 
-func (h *droneHandler) Create() http.HandlerFunc {
+func (h *droneHandler) Add() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req object.DroneAdd
-		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		var droneData object.DroneAdd
+		if err := json.NewDecoder(r.Body).Decode(&droneData); err != nil {
+			h.logger.WithError(err).Warn("Failed to decode drone JSON")
 			dshttp.FailResponse(w, "bad-request", "Bad JSON", nil)
 			return
 		}
 
-		newDrone := object.Drone{
-			Quadrant: req.Quadrant,
-			X:        req.X,
-			Y:        req.Y,
+		if errs := droneData.Validate(); errs != nil {
+			dshttp.FailResponse(w, "validation", "Drone data is invalid", errs)
+			return
 		}
 
-		drone := h.droneStorage.Add(newDrone)
+		drone, err := h.droneService.Add(r.Context(), droneData)
+		if err != nil {
+			h.logger.WithError(err).Error("Failed to add new drone")
+			dshttp.InternalServerErrorResponse(w)
+			return
+		}
 
 		dshttp.JSONResponse(w, drone, nil)
 	}
 }
 
-func (h *droneHandler) Delete() http.HandlerFunc {
+func (h *droneHandler) Remove() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		droneID := mux.Vars(r)["droneID"]
 		if droneID == "" {
@@ -69,9 +91,14 @@ func (h *droneHandler) Delete() http.HandlerFunc {
 			return
 		}
 
-		ok := h.droneStorage.Remove(droneID)
-		if !ok {
-			dshttp.NotFoundErrorResponse(w)
+		err := h.droneService.Remove(r.Context(), droneID)
+		if err != nil {
+			if err == service.ErrDroneNotFound {
+				dshttp.NotFoundErrorResponse(w)
+				return
+			}
+			h.logger.WithError(err).Error("Failed to remove drone by ID")
+			dshttp.InternalServerErrorResponse(w)
 			return
 		}
 
