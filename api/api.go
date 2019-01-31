@@ -11,9 +11,9 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/kelseyhightower/envconfig"
 
-	"github.com/dreadatour/drone-station/object"
 	"github.com/dreadatour/drone-station/pkg/dshttp"
 	"github.com/dreadatour/drone-station/pkg/dslog"
+	"github.com/dreadatour/drone-station/service"
 	"github.com/dreadatour/drone-station/storage"
 )
 
@@ -38,30 +38,22 @@ func Run() error {
 		return err
 	}
 
-	// initialise storages
-	var (
-		droneStorage = storage.NewDronesStorage([]*object.Drone{
-			&object.Drone{
-				ID:       "45745c60-7b1a-11e8-9c9c-2d42b21b1a3e",
-				Quadrant: 10,
-				X:        "123.12",
-				Y:        "456.56",
-			},
-		})
-	)
+	// storage
+	var droneStorage = storage.NewDronesStorage(logger)
+
+	// service
+	var droneService = service.NewDroneService(droneStorage, logger)
 
 	// handlers
-	var (
-		droneHandlers = NewDroneHandlers(droneStorage, logger)
-	)
+	var droneHandlers = NewDroneHandlers(droneService, logger)
 
 	// initialise router
 	router := mux.NewRouter().StrictSlash(true)
 
 	// user routes
 	router.Path("/api/v1/drones").Methods(http.MethodGet).HandlerFunc(droneHandlers.List())
-	router.Path("/api/v1/drones").Methods(http.MethodPost).HandlerFunc(droneHandlers.Create())
-	router.Path("/api/v1/drones/{droneID}").Methods(http.MethodDelete).HandlerFunc(droneHandlers.Delete())
+	router.Path("/api/v1/drones").Methods(http.MethodPost).HandlerFunc(droneHandlers.Add())
+	router.Path("/api/v1/drones/{droneID}").Methods(http.MethodDelete).HandlerFunc(droneHandlers.Remove())
 
 	// start HTTP server
 	addr := cfg.HTTP.Address()
