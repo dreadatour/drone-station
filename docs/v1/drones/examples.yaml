@@ -5,9 +5,9 @@ Response:
       status: success
       payload:
         id: 45745c60-7b1a-11e8-9c9c-2d42b21b1a3e
-        quadrant: 10
-        x: 123.12
-        y: 456.56
+        quadrant: u15pmus9
+        x: 12.23
+        y: 45.56
 
   List:
     summary: Drones list
@@ -15,18 +15,18 @@ Response:
       status: success
       payload:
         - id: 45745c60-7b1a-11e8-9c9c-2d42b21b1a3e
-          quadrant: 10
-          x: 123.12
-          y: 456.56
+          quadrant: u15pmus9
+          x: 12.23
+          y: 45.56
         - id: f873ea6d-6539-40ce-9adf-93e077c556cc
-          quadrant: 13
-          x: 12.12
-          y: 23.23
+          quadrant: u15pmus9
+          x: 67.78
+          y: 78.89
 
 Request:
   Add:
     summary: Add drone
     value:
-      quadrant: 13
-      x: 12.12
-      y: 23.23
+      quadrant: u15pmus9
+      x: 12.23
+      y: 23.34

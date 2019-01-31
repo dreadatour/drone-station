@@ -6,14 +6,14 @@ Drone:
       type: string
       description: Drone ID.
     quadrant:
-      type: number
-      description: Map quadrant.
+      type: string
+      description: Map quadrant (geohash).
     x:
       type: string
-      description: Drone position X relative to quadrant, quadrant + x = longitude (treated as floating point number).
+      description: Drone position X relative to quadrant so quadrant min longitude equal to x = 0.0 and quadrant max longitude equal to x = 100.0 (treated as floating point number).
     y:
       type: string
-      description: Drone position Y relative to quadrant, quadrant + y = latitude (treated as floating point number).
+      description: Drone position Y relative to quadrant so quadrant min latitude equal to y = 0.0 and quadrant max latitude equal to y = 100.0 (treated as floating point number).
 
 DroneResponse:
   type: object
@@ -50,11 +50,11 @@ DroneAddRequest:
   description: Add new drone request.
   properties:
     quadrant:
-      type: number
+      type: string
       description: Map quadrant.
     x:
       type: string
-      description: Drone position X relative to quadrant, quadrant + x = longitude (treated as floating point number).
+      description: Drone position X relative to quadrant so quadrant min longitude equal to x = 0.0 and quadrant max longitude equal to x = 100.0 (treated as floating point number).
     y:
       type: string
-      description: Drone position Y relative to quadrant, quadrant + y = latitude (treated as floating point number).
+      description: Drone position Y relative to quadrant so quadrant min latitude equal to y = 0.0 and quadrant max latitude equal to y = 100.0 (treated as floating point number).
