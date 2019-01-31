@@ -3,72 +3,84 @@ package storage
 import (
 	"sync"
 
-	"github.com/dreadatour/drone-station/object"
+	"github.com/dreadatour/drone-station/pkg/dsgeo"
+
+	"github.com/dreadatour/drone-station/model"
 	uuid "github.com/satori/go.uuid"
 )
 
-// Drones storage
-type Drones struct {
-	mx sync.RWMutex
-	m  map[string]*object.Drone
+// DroneStorage is implementation of drones dumb in-memory "database"
+type DroneStorage interface {
+	List() []model.Drone
+	ListWithinQuadrant(quadrant dsgeo.Quadrant) []model.Drone
+	Add(drone model.Drone) *model.Drone
+	Remove(droneID string) bool
 }
 
-// NewDronesStorage returns new drones storage initialised by list of drones
-func NewDronesStorage(list []*object.Drone) *Drones {
-	var m = make(map[string]*object.Drone)
-	for _, d := range list {
-		m[d.ID] = d
+// NewDronesStorage returns new drones storage
+func NewDronesStorage() DroneStorage {
+	return &droneStorage{
+		m: make([]model.Drone, 0),
 	}
-
-	return &Drones{m: m}
 }
 
-// List all drones
-func (s *Drones) List() []*object.Drone {
-	var res []*object.Drone
+// droneStorage storage
+type droneStorage struct {
+	mx sync.RWMutex
+	m  []model.Drone
+}
+
+// List of all drones
+func (s *droneStorage) List() []model.Drone {
+	s.mx.RLock()
+	defer s.mx.RUnlock()
+
+	return s.m
+}
+
+// List of drones within quadrant
+func (s *droneStorage) ListWithinQuadrant(quadrant dsgeo.Quadrant) []model.Drone {
+	var res []model.Drone
 
 	s.mx.RLock()
 	defer s.mx.RUnlock()
 
 	for _, d := range s.m {
-		res = append(res, d)
+		contains, err := quadrant.Contains(d.Latitude, d.Longitude)
+		if err != nil {
+			panic(err)
+		}
+		if contains {
+			res = append(res, d)
+		}
 	}
 
 	return res
 }
 
-// Get drone by ID
-func (s *Drones) Get(key string) (*object.Drone, bool) {
-	s.mx.RLock()
-	defer s.mx.RUnlock()
-
-	val, ok := s.m[key]
-
-	return val, ok
-}
-
 // Add drone to storage
-func (s *Drones) Add(value object.Drone) *object.Drone {
-	value.ID = uuid.NewV4().String()
+func (s *droneStorage) Add(drone model.Drone) *model.Drone {
+	drone.ID = uuid.NewV4().String()
 
 	s.mx.Lock()
 	defer s.mx.Unlock()
 
-	s.m[value.ID] = &value
+	s.m = append(s.m, drone)
 
-	return &value
+	return &drone
 }
 
 // Remove drone from storage
-func (s *Drones) Remove(ID string) bool {
+func (s *droneStorage) Remove(droneID string) bool {
 	s.mx.Lock()
 	defer s.mx.Unlock()
 
-	if _, ok := s.m[ID]; !ok {
-		return false
+	for i, d := range s.m {
+		if d.ID == droneID {
+			s.m = append(s.m[:i], s.m[i+1:]...)
+			return true
+		}
 	}
 
-	delete(s.m, ID)
-
-	return true
+	return false
 }
