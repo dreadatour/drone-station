@@ -1,9 +1,11 @@
 package storage
 
 import (
+	"context"
 	"sync"
 
 	"github.com/dreadatour/drone-station/pkg/dsgeo"
+	"github.com/sirupsen/logrus"
 
 	"github.com/dreadatour/drone-station/model"
 	uuid "github.com/satori/go.uuid"
@@ -11,27 +13,29 @@ import (
 
 // DroneStorage is implementation of drones dumb in-memory "database"
 type DroneStorage interface {
-	List() []model.Drone
-	ListWithinQuadrant(quadrant dsgeo.Quadrant) []model.Drone
-	Add(drone model.Drone) *model.Drone
-	Remove(droneID string) bool
+	List(ctx context.Context) []model.Drone
+	ListWithinQuadrant(ctx context.Context, quadrant dsgeo.Quadrant) []model.Drone
+	Add(ctx context.Context, drone model.Drone) *model.Drone
+	Remove(ctx context.Context, droneID string) bool
 }
 
 // NewDronesStorage returns new drones storage
-func NewDronesStorage() DroneStorage {
+func NewDronesStorage(logger *logrus.Logger) DroneStorage {
 	return &droneStorage{
-		m: make([]model.Drone, 0),
+		m:      make([]model.Drone, 0),
+		logger: logger,
 	}
 }
 
 // droneStorage storage
 type droneStorage struct {
-	mx sync.RWMutex
-	m  []model.Drone
+	mx     sync.RWMutex
+	m      []model.Drone
+	logger *logrus.Logger
 }
 
 // List of all drones
-func (s *droneStorage) List() []model.Drone {
+func (s *droneStorage) List(ctx context.Context) []model.Drone {
 	s.mx.RLock()
 	defer s.mx.RUnlock()
 
@@ -39,7 +43,7 @@ func (s *droneStorage) List() []model.Drone {
 }
 
 // List of drones within quadrant
-func (s *droneStorage) ListWithinQuadrant(quadrant dsgeo.Quadrant) []model.Drone {
+func (s *droneStorage) ListWithinQuadrant(ctx context.Context, quadrant dsgeo.Quadrant) []model.Drone {
 	var res []model.Drone
 
 	s.mx.RLock()
@@ -59,7 +63,7 @@ func (s *droneStorage) ListWithinQuadrant(quadrant dsgeo.Quadrant) []model.Drone
 }
 
 // Add drone to storage
-func (s *droneStorage) Add(drone model.Drone) *model.Drone {
+func (s *droneStorage) Add(ctx context.Context, drone model.Drone) *model.Drone {
 	drone.ID = uuid.NewV4().String()
 
 	s.mx.Lock()
@@ -71,7 +75,7 @@ func (s *droneStorage) Add(drone model.Drone) *model.Drone {
 }
 
 // Remove drone from storage
-func (s *droneStorage) Remove(droneID string) bool {
+func (s *droneStorage) Remove(ctx context.Context, droneID string) bool {
 	s.mx.Lock()
 	defer s.mx.Unlock()
 
