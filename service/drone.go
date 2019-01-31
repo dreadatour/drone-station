@@ -13,8 +13,8 @@ import (
 	"github.com/dreadatour/drone-station/storage"
 )
 
-// ErrDroneNotFound is "Drone not found" error
-var ErrDroneNotFound = fmt.Errorf("Drone not found")
+// ErrDroneNotFound is "drone not found" error
+var ErrDroneNotFound = fmt.Errorf("drone not found")
 
 // DroneService is drone service
 type DroneService interface {

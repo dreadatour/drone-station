@@ -7,14 +7,14 @@ import (
 )
 
 var (
-	// ErrBadCoordinate is "Wrong coordinate, should be from 0 to 100" error
-	ErrBadCoordinate = fmt.Errorf("Wrong coordinate, should be from 0 to 100")
-	// ErrCoordinateOutOfRange is "Coordinate does not belongs to quadrant" error
-	ErrCoordinateOutOfRange = fmt.Errorf("Coordinate does not belongs to quadrant")
-	// ErrBadLatitude is "Wrong latitude, should be from -90 to 90" error
-	ErrBadLatitude = fmt.Errorf("Wrong latitude, should be from -90 to 90")
-	// ErrBadLongitude is "Wrong longitude, should be from -180 to 180" error
-	ErrBadLongitude = fmt.Errorf("Wrong longitude, should be from -180 to 180")
+	// ErrBadCoordinate is "wrong coordinate, should be from 0 to 100" error
+	ErrBadCoordinate = fmt.Errorf("wrong coordinate, should be from 0 to 100")
+	// ErrCoordinateOutOfRange is "coordinate does not belongs to quadrant" error
+	ErrCoordinateOutOfRange = fmt.Errorf("coordinate does not belongs to quadrant")
+	// ErrBadLatitude is "wrong latitude, should be from -90 to 90" error
+	ErrBadLatitude = fmt.Errorf("wrong latitude, should be from -90 to 90")
+	// ErrBadLongitude is "wrong longitude, should be from -180 to 180" error
+	ErrBadLongitude = fmt.Errorf("wrong longitude, should be from -180 to 180")
 )
 
 // Quadrant is map area with bounding box coordinates and geohash string

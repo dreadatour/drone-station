@@ -23,7 +23,7 @@ func NewLogger(cfg *Config) (*logrus.Logger, error) {
 	case "panic":
 		logrus.SetLevel(logrus.PanicLevel)
 	default:
-		return nil, fmt.Errorf("Error parse config: unknown log level '%s'", cfg.Level)
+		return nil, fmt.Errorf("error parse config: unknown log level '%s'", cfg.Level)
 	}
 
 	switch strings.ToLower(cfg.Format) {
@@ -34,7 +34,7 @@ func NewLogger(cfg *Config) (*logrus.Logger, error) {
 	case "json":
 		logrus.SetFormatter(&logrus.JSONFormatter{})
 	default:
-		return nil, fmt.Errorf("Error parse config: unknown log format '%s'", cfg.Format)
+		return nil, fmt.Errorf("error parse config: unknown log format '%s'", cfg.Format)
 	}
 
 	logger := logrus.StandardLogger()

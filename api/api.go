@@ -72,7 +72,7 @@ func Run() error {
 
 	// wait for a signal to quit
 	signalChan := make(chan os.Signal, 1)
-	signal.Notify(signalChan, os.Interrupt, os.Kill, syscall.SIGTERM)
+	signal.Notify(signalChan, os.Interrupt, syscall.SIGTERM)
 
 	// graceful shutdown
 	cleanupDone := make(chan struct{})

@@ -6,12 +6,12 @@ import (
 )
 
 var (
-	// ErrDroneQuadrantEmpty is "Drone quadrant is empty" error
-	ErrDroneQuadrantEmpty = fmt.Errorf("Drone quadrant is empty")
-	// ErrDroneCoordIsEmpty is "Drone coordinate is empty" error
-	ErrDroneCoordIsEmpty = fmt.Errorf("Drone coordinate is empty")
-	// ErrBadDroneCoord is "Drone coordinate should be float from 0 to 100" error
-	ErrBadDroneCoord = fmt.Errorf("Drone coordinate should be float from 0 to 100")
+	// ErrDroneQuadrantEmpty is "drone quadrant is empty" error
+	ErrDroneQuadrantEmpty = fmt.Errorf("drone quadrant is empty")
+	// ErrDroneCoordIsEmpty is "drone coordinate is empty" error
+	ErrDroneCoordIsEmpty = fmt.Errorf("drone coordinate is empty")
+	// ErrBadDroneCoord is "drone coordinate should be float from 0 to 100" error
+	ErrBadDroneCoord = fmt.Errorf("drone coordinate should be float from 0 to 100")
 )
 
 // DroneAdd is request for add new drone
