@@ -1,4 +1,4 @@
-.PHONY: api open-api-docs install-tests install-linter test lint
+.PHONY: api web open-api-docs install-tests install-linter test lint lint-web
 
 define API_DOCS_SERVE
 import os, subprocess, sys
@@ -15,6 +15,9 @@ export API_DOCS_SERVE
 api:
 	@go run cmd/api/main.go -dotenv
 
+web:
+	@pushd web; yarn dev; popd
+
 open-api-docs:
 	@python -c "$$API_DOCS_SERVE"
 
@@ -30,3 +33,6 @@ test:
 
 lint:
 	@gometalinter --vendor ./...
+
+lint-web:
+	@pushd web; yarn lint; popd

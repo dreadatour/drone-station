@@ -27,6 +27,21 @@ y=16.75
 ```
 
 
+## Docker
+
+Build server container:
+
+```
+docker build -t drone-station/api -f Dockerfile .
+```
+
+Build web App container:
+
+```
+docker build -t drone-station/web -f web/Dockerfile web
+```
+
+
 ## Config
 
 All configuration taken from environment variables.
@@ -45,8 +60,29 @@ All logs goes into STDOUT. Configuration:
 * *LOG_LEVEL* is logging level (available values are pretty common: `debug`, `info`, `warning`, `error`, `fatal` and `panic`).
 * *LOG_FORMAT* is log output format: `json` for JSON logs, `text` for colorised text logs and `plaintext` for plain text logs.
 
+### Web App configuration
+
+* *API_URL* is API endpoints URL (examples: `http://127.0.0.1:8081/api/`, `https://api.drone-station.com`)
+
 
 ## Development
+
+1. Run server:
+
+```
+$ make api
+```
+
+2. Run web App:
+
+```
+$ make web
+```
+
+3. Open browser: [http://127.0.0.1:8081/](http://127.0.0.1:8081/)
+
+4. Enjoy!
+
 
 ### Config
 
@@ -72,4 +108,4 @@ $ make open_api_docs
 
 ### Vendoring
 
-Third-party packages are vendored using [dep](https://github.com/golang/dep).
+Third-party packages are vendored using [dep](https://github.com/golang/dep) for Golang and [Yarn](https://yarnpkg.com/) for TypeScript.
