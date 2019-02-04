@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"math/rand"
 	"strconv"
 
 	"github.com/sirupsen/logrus"
@@ -66,6 +67,8 @@ func (s *droneService) Add(ctx context.Context, droneData object.DroneAdd) (*obj
 	drone := s.droneStorage.Add(ctx, model.Drone{
 		Latitude:  latitude,
 		Longitude: longitude,
+		Direction: rand.Float64(),
+		Speed:     rand.Float64() / 100000,
 	})
 
 	return object.DroneFromModel(drone, quadrant)

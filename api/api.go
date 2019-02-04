@@ -14,6 +14,7 @@ import (
 	"github.com/dreadatour/drone-station/pkg/dshttp"
 	"github.com/dreadatour/drone-station/pkg/dslog"
 	"github.com/dreadatour/drone-station/service"
+	"github.com/dreadatour/drone-station/simulator"
 	"github.com/dreadatour/drone-station/storage"
 )
 
@@ -43,6 +44,10 @@ func Run() error {
 
 	// service
 	var droneService = service.NewDroneService(droneStorage, logger)
+
+	// run drone simulator
+	var droneSimulator = simulator.NewDroneSimulator(droneStorage, logger)
+	droneSimulator.Run()
 
 	// handlers
 	var droneHandlers = NewDroneHandlers(droneService, logger)

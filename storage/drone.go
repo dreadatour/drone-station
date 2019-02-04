@@ -16,6 +16,7 @@ type DroneStorage interface {
 	List(ctx context.Context) []model.Drone
 	ListWithinQuadrant(ctx context.Context, quadrant dsgeo.Quadrant) []model.Drone
 	Add(ctx context.Context, drone model.Drone) *model.Drone
+	Update(ctx context.Context, drone model.Drone) bool
 	Remove(ctx context.Context, droneID string) bool
 }
 
@@ -72,6 +73,21 @@ func (s *droneStorage) Add(ctx context.Context, drone model.Drone) *model.Drone 
 	s.m = append(s.m, drone)
 
 	return &drone
+}
+
+// Update drone in storage
+func (s *droneStorage) Update(ctx context.Context, drone model.Drone) bool {
+	s.mx.Lock()
+	defer s.mx.Unlock()
+
+	for i, d := range s.m {
+		if d.ID == drone.ID {
+			s.m[i] = drone
+			return true
+		}
+	}
+
+	return false
 }
 
 // Remove drone from storage
