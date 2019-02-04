@@ -241,7 +241,7 @@ func TestDroneHandlersAdd(t *testing.T) {
 					So(body.Status, ShouldEqual, "fail")
 					So(body.Code, ShouldEqual, "validation")
 					So(body.Message, ShouldEqual, "Drone data is invalid")
-					So(body.Payload, ShouldResemble, map[string]interface{}{`quadrant`: "Drone quadrant is empty"})
+					So(body.Payload, ShouldResemble, map[string]interface{}{`quadrant`: "drone quadrant is empty"})
 				})
 			})
 		})

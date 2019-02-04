@@ -2,6 +2,7 @@ package service_test
 
 import (
 	"context"
+	"math/rand"
 	"testing"
 
 	"github.com/dreadatour/drone-station/object"
@@ -73,13 +74,15 @@ func TestDroneServiceList(t *testing.T) {
 }
 
 func TestDroneServiceAdd(t *testing.T) {
+	rand.Seed(100)
+
 	Convey("Having drone service", t, func() {
 		storage := new(mock.DroneStorage)
 		logger, _ := test.NewNullLogger()
 		droneService := service.NewDroneService(storage, logger)
 
 		Convey("Adding new drone", func() {
-			storage.On("Add", model.Drone{Latitude: 51.92436332702637, Longitude: 4.477656555175781}).Return(&model.Drone{ID: "45745c60-7b1a-11e8-9c9c-2d42b21b1a3e", Latitude: 51.92436332702637, Longitude: 4.477656555175781})
+			storage.On("Add", model.Drone{Latitude: 51.92436332702637, Longitude: 4.477656555175781, Direction: 0.8165026937796166, Speed: 9.60260894506087e-06}).Return(&model.Drone{ID: "45745c60-7b1a-11e8-9c9c-2d42b21b1a3e", Latitude: 51.92436332702637, Longitude: 4.477656555175781})
 
 			drone, err := droneService.Add(context.Background(), object.DroneAdd{Quadrant: "u15pmus9", X: "12", Y: "34"})
 

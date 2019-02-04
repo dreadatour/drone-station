@@ -18,45 +18,45 @@ func TestDroneAddValidation(t *testing.T) {
 			description: "All validation errors should be returned",
 			drone:       object.DroneAdd{},
 			expectedErrors: map[string]string{
-				`quadrant`: "Drone quadrant is empty",
-				`x`:        "Drone coordinate is empty",
-				`y`:        "Drone coordinate is empty",
+				`quadrant`: "drone quadrant is empty",
+				`x`:        "drone coordinate is empty",
+				`y`:        "drone coordinate is empty",
 			},
 		},
 		"Given drone object with incorrect coordinates X and Y": {
 			description: "Coordinate validation error should be returned",
 			drone:       object.DroneAdd{Quadrant: "u15pmus9", X: "foobar", Y: "121.13"},
 			expectedErrors: map[string]string{
-				`x`: "Drone coordinate should be float from 0 to 100",
-				`y`: "Drone coordinate should be float from 0 to 100",
+				`x`: "drone coordinate should be float from 0 to 100",
+				`y`: "drone coordinate should be float from 0 to 100",
 			},
 		},
 		"Given drone object with incorrect coordinate X": {
 			description: "Coordinate validation error should be returned",
 			drone:       object.DroneAdd{Quadrant: "u15pmus9", X: "foobar", Y: "12.13"},
 			expectedErrors: map[string]string{
-				`x`: "Drone coordinate should be float from 0 to 100",
+				`x`: "drone coordinate should be float from 0 to 100",
 			},
 		},
 		"Given drone object with wrong coordinate X": {
 			description: "Coordinate validation error should be returned",
 			drone:       object.DroneAdd{Quadrant: "u15pmus9", X: "-1", Y: "12.13"},
 			expectedErrors: map[string]string{
-				`x`: "Drone coordinate should be float from 0 to 100",
+				`x`: "drone coordinate should be float from 0 to 100",
 			},
 		},
 		"Given drone object with incorrect coordinate Y": {
 			description: "Coordinate validation error should be returned",
 			drone:       object.DroneAdd{Quadrant: "u15pmus9", X: "12.13", Y: "foobar"},
 			expectedErrors: map[string]string{
-				`y`: "Drone coordinate should be float from 0 to 100",
+				`y`: "drone coordinate should be float from 0 to 100",
 			},
 		},
 		"Given drone object with wrong coordinate Y": {
 			description: "Coordinate validation error should be returned",
 			drone:       object.DroneAdd{Quadrant: "u15pmus9", X: "12.13", Y: "121.13"},
 			expectedErrors: map[string]string{
-				`y`: "Drone coordinate should be float from 0 to 100",
+				`y`: "drone coordinate should be float from 0 to 100",
 			},
 		},
 		"Given correct drone object": {
