@@ -33,6 +33,11 @@ func (m *DroneStorage) Add(ctx context.Context, drone model.Drone) *model.Drone 
 	return m.Called(drone).Get(0).(*model.Drone)
 }
 
+// Update mocked
+func (m *DroneStorage) Update(ctx context.Context, drone model.Drone) bool {
+	return m.Called(drone).Get(0).(bool)
+}
+
 // Remove mocked
 func (m *DroneStorage) Remove(ctx context.Context, droneID string) bool {
 	return m.Called(droneID).Get(0).(bool)
