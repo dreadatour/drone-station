@@ -7,23 +7,11 @@ export type DronesListStateProps = {
   drones: Drone[] | null
 };
 
-export type DronesListDispatchProps = {
-  loadDronesList: (quadrant: string) => void
-  cleanupDrones: () => void
-};
+export type DronesListDispatchProps = {};
 
 type DronesListProps = DronesListStateProps & DronesListDispatchProps;
 
 class DronesList extends React.Component<DronesListProps> {
-  componentDidMount () {
-    window.scrollTo(0, 0);
-    this.props.loadDronesList(this.props.geohash);
-  }
-
-  componentWillUnmount () {
-    this.props.cleanupDrones();
-  }
-
   private renderDrones = () => {
     if (this.props.drones === null || this.props.drones.length === 0) {
       return (
@@ -47,12 +35,12 @@ class DronesList extends React.Component<DronesListProps> {
 
   render () {
     return (
-      <div className='p-3'>
+      <div className='p-3 border-top'>
         <table className='table table-sm table-borderless align-middle text-left'>
           <thead>
             <tr>
-              <td className='align-bottom text-left'><h5>Drones:</h5></td>
-              <td className='text-right'><button className='btn btn-primary w-100'><i className='fas fa-plus' /> Add</button></td>
+              <td><h5>Drones:</h5></td>
+              <td></td>
             </tr>
           </thead>
           <tbody>

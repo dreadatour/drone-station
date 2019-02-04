@@ -20,7 +20,7 @@ class GeohashInfo extends React.Component<GeohashInfoProps> {
     const geoNeighbours = neighbours(geohash);
 
     return (
-      <div className='p-3 border-bottom'>
+      <div className='p-3'>
         <table className='table table-sm table-borderless align-middle text-center'>
           <thead>
             <tr>
