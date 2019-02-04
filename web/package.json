@@ -18,16 +18,22 @@
     "lint": "tslint --config tslint.json --project tsconfig.json 'src/**/*.ts{,x}'"
   },
   "dependencies": {
+    "@types/latlon-geohash": "^1.1.0",
+    "@types/leaflet": "^1.4.0",
     "@types/react": "^16.7.22",
     "@types/react-dom": "^16.0.11",
+    "@types/react-leaflet": "^1.1.6",
     "@types/react-redux": "^7.0.1",
     "@types/react-router-dom": "^4.3.1",
     "@types/redux": "^3.6.0",
     "axios": "^0.18.0",
     "connected-react-router": "^6.2.2",
     "ejs": "^2.6.1",
+    "latlon-geohash": "^1.1.0",
+    "leaflet": "^1.4.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-leaflet": "^2.2.0",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "redux-thunk": "^2.3.0"

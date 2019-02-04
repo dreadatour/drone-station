@@ -44,10 +44,27 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
+"@types/geojson@*":
+  version "7946.0.5"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.5.tgz#9aea839ea5af4b1bc079f1d9fa977d48665e02b0"
+  integrity sha512-rLlMXpd3rdlrp0+xsrda/hFfOpIxgqFcRpk005UKbHtcdFK+QXAjhBAPnvO58qF4O1LdDXrcaiJxMgstCIlcaw==
+
 "@types/history@*":
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"
   integrity sha512-ui3WwXmjTaY73fOQ3/m3nnajU/Orhi6cEu5rzX+BrAAJxa3eITXZ5ch9suPqtM03OWhAHhPSyBGCN4UKoxO20Q==
+
+"@types/latlon-geohash@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@types/latlon-geohash/-/latlon-geohash-1.1.0.tgz#204dac465269f302bf21c877c84473c4d71305d7"
+  integrity sha512-GqP7AQvUkbcEj8LgVlJ8SA8iVqlvHQmMf46H3S+I/RbLQwFjJGC+TPOQhHPIQsj+Et44MihSLDouR66O52pnYA==
+
+"@types/leaflet@*", "@types/leaflet@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.4.0.tgz#08caffafdad23fcdd6bbe3f91c25a0c688e4310e"
+  integrity sha512-ZA+g6XyK/00labaNCWhbhahAOwEf9X4v9cAB0ZBwWjGOj5ewPC8qcdN/M2VsIAfP699Yz3+E7zaaClxmRaf4BQ==
+  dependencies:
+    "@types/geojson" "*"
 
 "@types/prop-types@*":
   version "15.5.8"
@@ -59,6 +76,14 @@
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.11.tgz#bd10ccb0d9260343f4b9a49d4f7a8330a5c1f081"
   integrity sha512-x6zUx9/42B5Kl2Vl9HlopV8JF64wLpX3c+Pst9kc1HgzrsH+mkehe/zmHMQTplIrR48H2gpU7ZqurQolYu8XBA==
   dependencies:
+    "@types/react" "*"
+
+"@types/react-leaflet@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@types/react-leaflet/-/react-leaflet-1.1.6.tgz#663bf2568a7017081406a85ae0f593f89e53cd7c"
+  integrity sha512-OSsVphTvQxacAmwySe/ju/ahhRoMnHmJzdc6tYjfTHAaSeLkJs8WSkBzdgsTu8tPLmhY0ULQ1KJ27ue5kU3zUQ==
+  dependencies:
+    "@types/leaflet" "*"
     "@types/react" "*"
 
 "@types/react-redux@^7.0.1":
@@ -2826,12 +2851,22 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
 
+latlon-geohash@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/latlon-geohash/-/latlon-geohash-1.1.0.tgz#7abe15224c4800e3eaecac71c753a20bfb6cbf65"
+  integrity sha1-er4VIkxIAOPq7Kxxx1OiC/tsv2U=
+
 lcid@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/lcid/-/lcid-2.0.0.tgz#6ef5d2df60e52f82eb228a4c373e8d1f397253cf"
   integrity sha512-avPEb8P8EGnwXKClwsNUgryVjllcRqtMYa49NTsbQagYuT1DcXnl1915oxWjoyGrXR6zH/Y0Zc96xWsPcoDKeA==
   dependencies:
     invert-kv "^2.0.0"
+
+leaflet@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.4.0.tgz#d5f56eeb2aa32787c24011e8be4c77e362ae171b"
+  integrity sha512-x9j9tGY1+PDLN9pcWTx9/y6C5nezoTMB8BLK5jTakx+H7bPlnbCHfi9Hjg+Qt36sgDz/cb9lrSpNQXmk45Tvhw==
 
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
@@ -3931,6 +3966,16 @@ react-is@^16.6.3, react-is@^16.7.0:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
   integrity sha512-Z0VRQdF4NPDoI0tsXVMLkJLiwEBa+RP66g0xDHxgxysxSoCUccSten4RTF/UFvZF1dZvZ9Zu1sx+MDXwcOR34g==
+
+react-leaflet@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-2.2.0.tgz#9372dc74790515cef723a173833009b7709cbec6"
+  integrity sha512-TCjqIp9ET2LMOK+rBjJTQQesk/9UrP6+zsXoSJU8ZzuyJWVQERLGadDng4yZ63XgIcB7aEAXnl93IsmF46uDyQ==
+  dependencies:
+    "@babel/runtime" "^7.2.0"
+    fast-deep-equal "^2.0.1"
+    hoist-non-react-statics "^3.2.1"
+    warning "^4.0.0"
 
 react-redux@^6.0.0:
   version "6.0.0"
@@ -5063,7 +5108,7 @@ warning@^3.0.0:
   dependencies:
     loose-envify "^1.0.0"
 
-warning@^4.0.1:
+warning@^4.0.0, warning@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.2.tgz#aa6876480872116fa3e11d434b0d0d8d91e44607"
   integrity sha512-wbTp09q/9C+jJn4KKJfJfoS6VleK/Dti0yqWSm6KMvJ4MRCXFQNapHuJXutJIrWV0Cf4AhTdeIe4qdKHR1+Hug==

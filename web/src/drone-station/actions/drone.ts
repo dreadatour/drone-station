@@ -55,9 +55,9 @@ const cleanupDronesActionCreator = (): CleanupDronesAction => ({
   type: DroneActionTypes.CLEANUP,
 });
 
-export const loadDronesList = () => {
+export const loadDronesList = (quadrant: string) => {
   return (dispatch: Dispatch) => {
-    Axios.get(`${API_URL}/v1/drones`)
+    Axios.get(`${API_URL}/v1/drones?quadrant=${quadrant}`)
       .then((response) => {
         dispatch(getDronesListActionCreator(response.data.payload));
       })

@@ -1,7 +1,7 @@
-import {DroneMap} from 'drone-station/models/drone';
+import {DronesMap} from 'drone-station/models/drone';
 
 type DronesState = {
-  list: DroneMap
+  list: DronesMap | null
 };
 
 export default DronesState;

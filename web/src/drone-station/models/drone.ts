@@ -11,6 +11,4 @@ export type DroneAdd = {
   y: string
 };
 
-export type DroneMap = {
-  [key: string]: Drone
-};
+export type DronesMap = Map<string, Drone>;
